@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taniti Tourism Website - Low-Fidelity Wireframe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            background: #ffffff;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* Skip to content for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #333;
+            color: white;
+            padding: 8px 16px;
+            z-index: 1001;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: #e0e0e0;
+            border-bottom: 2px solid #333;
+        }
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 15px 0;
+            text-decoration: none;
+            color: #333;
+            border: 2px dashed #999;
+            padding: 10px 15px;
+            background: #f5f5f5;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+        }
+        nav a {
+            color: #333;
+            text-decoration: none;
+            padding: 15px 12px;
+            display: block;
+            border: 1px solid #999;
+            background: #f0f0f0;
+            font-size: 13px;
+        }
+        nav a:hover, nav a:focus {
+            background: #ddd;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: #d0d0d0;
+            border-bottom: 2px solid #333;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .hero-image-placeholder {
+            width: 90%;
+            max-width: 600px;
+            height: 150px;
+            border: 2px dashed #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e8e8e8;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        .hero h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+        .hero p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            max-width: 500px;
+            color: #555;
+        }
+        .cta-button {
+            background: #333;
+            color: white;
+            padding: 12px 30px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Destination Overview */
+        .destination-overview {
+            background: #f5f5f5;
+            padding: 40px 20px;
+            border-bottom: 2px solid #333;
+        }
+        .overview-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+        .overview-image {
+            background: #e0e0e0;
+            height: 250px;
+            border: 2px dashed #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+        }
+        .overview-content h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #999;
+            padding-bottom: 5px;
+        }
+        .overview-content p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 12px;
+        }
+        .overview-stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+            border: 1px solid #999;
+            padding: 10px 15px;
+            background: #eee;
+        }
+        .stat-number {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        /* Section Styling */
+        .section {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .section-alt {
+            background: #f0f0f0;
+            max-width: 100%;
+            border-top: 2px solid #333;
+            border-bottom: 2px solid #333;
+        }
+        .section-alt .section-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .section-title {
+            font-size: 22px;
+            text-align: center;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 8px;
+            display: inline-block;
+            width: 100%;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        /* Filter Bar */
+        .filter-bar {
+            background: #eee;
+            padding: 15px;
+            border: 1px solid #999;
+            margin-bottom: 25px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-bar label {
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .filter-select {
+            padding: 8px 10px;
+            border: 1px solid #666;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+            background: white;
+        }
+        .filter-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 10px;
+            background: #fff;
+            border: 1px solid #666;
+            font-size: 12px;
+        }
+        .filter-checkbox input {
+            width: 16px;
+            height: 16px;
+        }
+        .ada-filter {
+            border: 2px solid #333;
+            background: #e8e8e8;
+        }
+        
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            border: 2px solid #333;
+            overflow: hidden;
+        }
+        .card-image {
+            height: 120px;
+            background: #d5d5d5;
+            border-bottom: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 12px;
+        }
+        .card-content {
+            padding: 15px;
+        }
+        .card-title {
+            font-size: 16px;
+            margin-bottom: 8px;
+            border-bottom: 1px dashed #999;
+            padding-bottom: 5px;
+        }
+        .card-text {
+            color: #555;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .card-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .card-tag {
+            background: #eee;
+            border: 1px solid #999;
+            padding: 3px 8px;
+            font-size: 10px;
+        }
+        .card-tag.ada {
+            border: 2px solid #333;
+            font-weight: bold;
+        }
+        .card-link {
+            color: #333;
+            text-decoration: underline;
+            font-size: 12px;
+        }
+        .book-btn {
+            display: inline-block;
+            background: #333;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Reviews Section */
+        .reviews-section {
+            background: #e0e0e0;
+            padding: 40px 20px;
+            border-top: 2px solid #333;
+            border-bottom: 2px solid #333;
+        }
+        .reviews-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .review-card {
+            background: white;
+            border: 2px solid #333;
+            padding: 20px;
+        }
+        .review-stars {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .review-text {
+            font-style: italic;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #555;
+        }
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .review-avatar {
+            width: 40px;
+            height: 40px;
+            background: #ddd;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .review-name {
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .review-location {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            background: #f5f5f5;
+            padding: 40px 20px;
+            border-top: 2px solid #333;
+        }
+        .faq-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: white;
+            margin-bottom: 10px;
+            border: 2px solid #333;
+        }
+        .faq-question {
+            width: 100%;
+            padding: 15px;
+            background: #eee;
+            border: none;
+            border-bottom: 1px solid #999;
+            text-align: left;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Courier New', monospace;
+        }
+        .faq-question:hover {
+            background: #e0e0e0;
+        }
+        .faq-number {
+            background: #333;
+            color: white;
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+        .faq-icon {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: white;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 15px;
+        }
+        .faq-answer p {
+            color: #555;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+        .faq-answer ul {
+            margin: 10px 0 10px 20px;
+            color: #555;
+            font-size: 13px;
+        }
+        .faq-answer li {
+            margin-bottom: 6px;
+        }
+        
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 40px 20px 20px;
+            border-top: 3px solid #000;
+        }
+        .footer-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+        }
+        .footer-col h3 {
+            font-size: 14px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #666;
+            padding-bottom: 5px;
+        }
+        .footer-col a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+        .footer-col a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        .footer-col p {
+            color: #ccc;
+            font-size: 12px;
+        }
+        .footer-bottom {
+            max-width: 1000px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #555;
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+        }
+        
+        /* Wireframe Label */
+        .wireframe-label {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #e0e0e0;
+                flex-direction: column;
+                padding: 10px;
+                border-top: 2px solid #333;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav a {
+                padding: 12px;
+                border-bottom: 1px solid #999;
+            }
+            .hero h1 {
+                font-size: 22px;
+            }
+            .overview-container {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 18px;
+            }
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-label">LOW-FIDELITY WIREFRAME — TANITI TOURISM WEBSITE</div>
+    
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">[TANITI LOGO]</a>
+            <div class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="#things-to-do">Things To Do</a></li>
+                    <li><a href="#lodging">Lodging</a></li>
+                    <li><a href="#dining">Dining</a></li>
+                    <li><a href="#getting-here">Getting Here</a></li>
+                    <li><a href="#plan-your-trip">Plan Your Trip</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="main-content">
+        <div class="hero-image-placeholder">[HERO IMAGE - Beach/Island View]</div>
+        <h1>Welcome to Taniti Island</h1>
+        <p>Discover pristine beaches, lush rainforests, and an active volcano on this Pacific paradise</p>
+        <a href="#things-to-do" class="cta-button">Start Exploring →</a>
+    </section>
+    
+    <!-- Destination Overview -->
+    <section class="destination-overview">
+        <div class="overview-container">
+            <div class="overview-image">[ISLAND AERIAL VIEW IMAGE]</div>
+            <div class="overview-content">
+                <h2>Discover Taniti</h2>
+                <p>Taniti is a small, tropical island in the Pacific with an area of less than 500 square miles. Our varied terrain includes sandy and rocky beaches, a safe harbor, lush tropical rainforests, and a mountainous interior featuring a small, active volcano.</p>
+                <p>Home to an indigenous population of about 20,000, Taniti offers an authentic experience blending traditional culture with modern amenities.</p>
+                <div class="overview-stats">
+                    <div class="stat">
+                        <div class="stat-number">500</div>
+                        <div class="stat-label">Sq Miles</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">20K</div>
+                        <div class="stat-label">Population</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Restaurants</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Things To Do Section -->
+    <section class="section-alt" id="things-to-do">
+        <div class="section-inner">
+            <h2 class="section-title">Things To Do</h2>
+            <p class="section-subtitle">Adventures for every traveler</p>
+            
+            <div class="filter-bar">
+                <label>Filter:</label>
+                <select class="filter-select" aria-label="Filter by category">
+                    <option>All Categories</option>
+                    <option>Beaches & Water</option>
+                    <option>Nature & Adventure</option>
+                    <option>Entertainment</option>
+                    <option>Culture & History</option>
+                </select>
+                <label class="filter-checkbox">
+                    <input type="checkbox"> Family Friendly
+                </label>
+                <label class="filter-checkbox ada-filter">
+                    <input type="checkbox"> ♿ ADA Accessible
+                </label>
+            </div>
+            
+            <div class="cards-grid">
+                <article class="card">
+                    <div class="card-image">[BEACH PHOTO]</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Yellow Leaf Bay Beaches</h3>
+                        <p class="card-text">White sandy beaches perfect for swimming and family fun.</p>
+                        <div class="card-meta">
+                            <span class="card-tag">Family Friendly</span>
+                            <span class="card-tag ada">♿ Accessible</span>
+                        </div>
+                        <a href="#" class="card-link">Learn More →</a>
+                    </div>
+                </article>
+                
+                <article class="card">
+                    <div class="card-image">[RAINFOREST PHOTO]</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Rainforest Adventures</h3>
+                        <p class="card-text">Guided hikes and zip-lining through tropical canopy.</p>
+                        <div class="card-meta">
+                            <span class="card-tag">Adventure</span>
+                            <span class="card-tag">From $45</span>
+                        </div>
+                        <a href="#" class="card-link">Book Tour →</a>
+                    </div>
+                </article>
+                
+                <article class="card">
+                    <div class="card-image">[VOLCANO PHOTO]</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Volcano Expeditions</h3>
+                        <p class="card-text">Visit Taniti's active volcano with local guides.</p>
+                        <div class="card-meta">
+                            <span class="card-tag">Adventure</span>
+                            <span class="card-tag">From $75</span>
+                        </div>
+                        <a href="#" class="card-link">Book Expedition →</a>
+                    </div>
+                </article>
+                
+                <article class="card">
+                    <div class="card-image">[LANDMARK PHOTO]</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Historic Landmarks</h3>
+                        <p class="card-text">Explore ancient Tanitian sites and native architecture.</p>
+                        <div class="card-meta">
+                            <span class="card-tag">Culture</span>
+                            <span class="card-tag ada">♿ Accessible</span>
+                        </div>
+                        <a href="#" class="card-link">Explore Sites →</a>
+                    </div>
+                </article>
+                
+                <article class="card">
+                    <div class="card-image">[SNORKELING PHOTO]</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Snorkeling & Diving</h3>
+                        <p class="card-text">Crystal clear waters with vibrant marine life.</p>
+                        <div class="card-meta">
+                            <span class="card-tag">Water Sports</span>
+                            <span class="card-tag">From $35</span>
+                        </div>
+                        <a href="#" class="card-link">Book Now →</a>
+                    </div>
+                </article>
+                
+                <article class="card">
+                    <div class="card-image">[MUSEUM PHOTO]</div>
+                    <div class="card-content">
+                        <h3 class="card-title">History Museum</h3>
+                        <p class="card-text">Learn about Tanitian culture and island history.</p>
+                        <div class="card-meta">
+                            <span class="card-tag">Family Friendly</span>
+                            <span class="card-tag ada">♿ Accessible</span>
+                        </div>
+                        <a href="#" class="card-link">Visit Museum →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Lodging Section -->
+    <section class="section" id="lodging">
+        <h2 class="section-title">Lodging</h2>
+        <p class="section-subtitle">From budget hostels to four-star resorts</p>
+        
+        <div class="filter-bar">
+            <label>Filter:</label>
+            <select class="filter-select" aria-label="Filter by type">
+                <option>All Types</option>
+                <option>Hotels & Resorts</option>
+                <option>Bed & Breakfasts</option>
+                <option>Vacation Rentals</option>
+                <option>Hostels</option>
+            </select>
+            <select class="filter-select" aria-label="Filter by price">
+                <option>Any Price</option>
+                <option>$ Budget</option>
+                <option>$$ Moderate</option>
+                <option>$$$ Upscale</option>
+            </select>
+            <label class="filter-checkbox">
+                <input type="checkbox"> Family Friendly
+            </label>
+            <label class="filter-checkbox ada-filter">
+                <input type="checkbox"> ♿ ADA Accessible
+            </label>
+        </div>
+        
+        <div class="cards-grid">
+            <article class="card">
+                <div class="card-image">[RESORT PHOTO]</div>
+                <div class="card-content">
+                    <h3 class="card-title">Taniti Bay Resort ★★★★</h3>
+                    <p class="card-text">Four-star oceanfront resort with pool, spa, and family suites.</p>
+                    <div class="card-meta">
+                        <span class="card-tag">$$$$</span>
+                        <span class="card-tag">Family</span>
+                        <span class="card-tag ada">♿</span>
+                    </div>
+                    <a href="#" class="book-btn">Book Now</a>
+                </div>
+            </article>
+            
+            <article class="card">
+                <div class="card-image">[HOTEL PHOTO]</div>
+                <div class="card-content">
+                    <h3 class="card-title">Taniti City Hotel</h3>
+                    <p class="card-text">Family-owned hotel, walking distance to beaches.</p>
+                    <div class="card-meta">
+                        <span class="card-tag">$$</span>
+                        <span class="card-tag">Family</span>
+                        <span class="card-tag ada">♿</span>
+                    </div>
+                    <a href="#" class="book-btn">Book Now</a>
+                </div>
+            </article>
+            
+            <article class="card">
+                <div class="card-image">[B&B PHOTO]</div>
+                <div class="card-content">
+                    <h3 class="card-title">Sunrise Bed & Breakfast</h3>
+                    <p class="card-text">Charming B&B with homemade breakfast included.</p>
+                    <div class="card-meta">
+                        <span class="card-tag">$$</span>
+                        <span class="card-tag">Breakfast</span>
+                    </div>
+                    <a href="#" class="book-btn">Book Now</a>
+                </div>
+            </article>
+            
+            <article class="card">
+                <div class="card-image">[HOSTEL PHOTO]</div>
+                <div class="card-content">
+                    <h3 class="card-title">Backpacker's Hostel</h3>
+                    <p class="card-text">Budget-friendly with shared and private rooms.</p>
+                    <div class="card-meta">
+                        <span class="card-tag">$</span>
+                        <span class="card-tag">Budget</span>
+                    </div>
+                    <a href="#" class="book-btn">Book Now</a>
+                </div>
+            </article>
+        </div>
+    </section>
+    
+    <!-- Dining Section -->
+    <section class="section-alt" id="dining">
+        <div class="section-inner">
+            <h2 class="section-title">Dining</h2>
+            <p class="section-subtitle">Local flavors and international cuisine</p>
+            
+            <div class="filter-bar">
+                <label>Filter:</label>
+                <select class="filter-select" aria-label="Filter by cuisine">
+                    <option>All Cuisines</option>
+                    <option>Local Tanitian</option>
+                    <option>American</option>
+                    <option>Pan-Asian</option>
+                </select>
+                <label class="filter-checkbox ada-filter">
+                    <input type="checkbox"> ♿ ADA Accessible
+                </label>
+            </div>
+            
+            <div class="cards-grid">
+                <article class="card">
+                    <div class="card-image">[RESTAURANT PHOTO]</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Ocean's Catch</h3>
+                        <p class="card-text">Fresh local fish and traditional Tanitian rice dishes.</p>
+                        <div class="card-meta">
+                            <span class="card-tag">Local</span>
+                            <span class="card-tag">$$</span>
+                            <span class="card-tag ada">♿</span>
+                        </div>
+                        <a href="#" class="card-link">View Menu →</a>
+                    </div>
+                </article>
+                
+                <article class="card">
+                    <div class="card-image">[RESTAURANT PHOTO]</div>
+                    <div class="card-content">
+                        <h3 class="card-title">American Grill House</h3>
+                        <p class="card-text">Classic burgers, steaks, and comfort food.</p>
+                        <div class="card-meta">
+                            <span class="card-tag">American</span>
+                            <span class="card-tag">$$</span>
+                        </div>
+                        <a href="#" class="card-link">View Menu →</a>
+                    </div>
+                </article>
+                
+                <article class="card">
+                    <div class="card-image">[RESTAURANT PHOTO]</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Jade Garden</h3>
+                        <p class="card-text">Authentic Pan-Asian cuisine.</p>
+                        <div class="card-meta">
+                            <span class="card-tag">Pan-Asian</span>
+                            <span class="card-tag">$$</span>
+                        </div>
+                        <a href="#" class="card-link">View Menu →</a>
+                    </div>
+                </article>
+                
+                <article class="card">
+                    <div class="card-image">[GROCERY PHOTO]</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Grocery & Markets</h3>
+                        <p class="card-text">Supermarkets and 24-hour convenience store.</p>
+                        <div class="card-meta">
+                            <span class="card-tag">Groceries</span>
+                            <span class="card-tag ada">♿</span>
+                        </div>
+                        <a href="#" class="card-link">Locations →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Getting Here Section -->
+    <section class="section" id="getting-here">
+        <h2 class="section-title">Getting Here</h2>
+        <p class="section-subtitle">Multiple ways to reach our island</p>
+        
+        <div class="cards-grid">
+            <article class="card">
+                <div class="card-image">[AIRPLANE PHOTO]</div>
+                <div class="card-content">
+                    <h3 class="card-title">By Air</h3>
+                    <p class="card-text">Most visitors arrive by air. Airport accommodates small jets and propeller planes.</p>
+                    <div class="card-meta">
+                        <span class="card-tag">Most Popular</span>
+                    </div>
+                    <a href="#" class="card-link">Flight Info →</a>
+                </div>
+            </article>
+            
+            <article class="card">
+                <div class="card-image">[CRUISE PHOTO]</div>
+                <div class="card-content">
+                    <h3 class="card-title">By Cruise Ship</h3>
+                    <p class="card-text">Cruise ship docks in Yellow Leaf Bay one night per week.</p>
+                    <div class="card-meta">
+                        <span class="card-tag">Weekly</span>
+                    </div>
+                    <a href="#" class="card-link">Cruise Schedule →</a>
+                </div>
+            </article>
+            
+            <article class="card">
+                <div class="card-image">[BUS PHOTO]</div>
+                <div class="card-content">
+                    <h3 class="card-title">Getting Around</h3>
+                    <p class="card-text">Public buses (5am-11pm), taxis, rental cars, bike rentals. City is walkable.</p>
+                    <div class="card-meta">
+                        <span class="card-tag ada">♿ Options</span>
+                    </div>
+                    <a href="#" class="card-link">Transport Guide →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+    
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <div class="reviews-container">
+            <h2 class="section-title">What Visitors Say</h2>
+            <p class="section-subtitle">Real reviews from travelers</p>
+            
+            <div class="reviews-grid">
+                <article class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Perfect family vacation! The kids loved the beaches and the volcano tour was unforgettable."</p>
+                    <div class="review-author">
+                        <div class="review-avatar">SM</div>
+                        <div>
+                            <div class="review-name">Sarah M.</div>
+                            <div class="review-location">Denver, CO</div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Our honeymoon was magical. The resort exceeded expectations. Snorkeling was incredible!"</p>
+                    <div class="review-author">
+                        <div class="review-avatar">JK</div>
+                        <div>
+                            <div class="review-name">James K.</div>
+                            <div class="review-location">Toronto, Canada</div>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="review-card">
+                    <div class="review-stars">★★★★☆</div>
+                    <p class="review-text">"Great for adventure seekers. Rainforest zip-lining was thrilling! Note: some places close on holidays."</p>
+                    <div class="review-author">
+                        <div class="review-avatar">LT</div>
+                        <div>
+                            <div class="review-name">Lisa T.</div>
+                            <div class="review-location">Austin, TX</div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Plan Your Trip / FAQ Section -->
+    <section class="faq-section" id="plan-your-trip">
+        <div class="faq-container">
+            <h2 class="section-title">Plan Your Trip</h2>
+            <p class="section-subtitle">Frequently Asked Questions</p>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                    <span><span class="faq-number">1</span>What currency is used on Taniti?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p><strong>Taniti uses the U.S. Dollar (USD)</strong> as its official currency.</p>
+                    <ul>
+                        <li>Many businesses also accept Euros (€) and Japanese Yen (¥)</li>
+                        <li>Several banks offer currency exchange services</li>
+                        <li>Most businesses accept major credit cards</li>
+                        <li>ATMs available in Taniti City</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                    <span><span class="faq-number">2</span>How much does a trip to Taniti cost?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Taniti offers options for every budget:</p>
+                    <ul>
+                        <li><strong>Budget ($50-100/day):</strong> Hostel, local restaurants, public buses</li>
+                        <li><strong>Mid-Range ($150-250/day):</strong> Hotels/B&Bs, mixed dining, rental car</li>
+                        <li><strong>Luxury ($300+/day):</strong> Four-star resort, fine dining, private tours</li>
+                    </ul>
+                    <p>Activities: Snorkeling from $35, Volcano tours from $75, Zip-lining from $45</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                    <span><span class="faq-number">3</span>What about local shopping?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Shopping options include:</p>
+                    <ul>
+                        <li><strong>Art Galleries:</strong> Local and visiting artists in Taniti City</li>
+                        <li><strong>Merriton Landing:</strong> Developing area with shops and entertainment</li>
+                        <li><strong>Local Markets:</strong> Fresh produce, handcrafted goods, souvenirs</li>
+                        <li><strong>Grocery:</strong> 2 supermarkets, 2 smaller stores, 1 24-hour convenience store</li>
+                    </ul>
+                    <p><em>Note: Many shops close on national holidays</em></p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                    <span><span class="faq-number">4</span>What cultural etiquette should I know?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Respect local customs:</p>
+                    <ul>
+                        <li><strong>Language:</strong> Younger Tanitians speak English. Little English in rural areas.</li>
+                        <li><strong>Holidays:</strong> Many national holidays — attractions may close</li>
+                        <li><strong>Alcohol:</strong> Not sold between midnight and 9:00 AM. Drinking age is 18.</li>
+                        <li><strong>Dress:</strong> Casual. Cover up when entering town from beach.</li>
+                        <li><strong>Tipping:</strong> Appreciated but not mandatory (10-15%)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                    <span><span class="faq-number">5</span>Is Taniti safe for tourists?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p><strong>Taniti is very safe.</strong> Violent crime is extremely rare.</p>
+                    <ul>
+                        <li>Some pickpocketing reported — keep valuables secure</li>
+                        <li>One hospital with multilingual staff and several clinics</li>
+                        <li>Most areas safe to walk, even at night</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                    <span><span class="faq-number">6</span>What practical information should I know?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Essential details:</p>
+                    <ul>
+                        <li><strong>Power:</strong> 120 volts (same as US)</li>
+                        <li><strong>Healthcare:</strong> Hospital and clinics available</li>
+                        <li><strong>Bikes:</strong> Rentals available. Helmets required by law.</li>
+                        <li><strong>Buses:</strong> Run 5:00 AM to 11:00 PM in Taniti City</li>
+                        <li><strong>Walking:</strong> Taniti City is flat and walkable</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                    <span><span class="faq-number">7</span>Is Taniti accessible for visitors with disabilities?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Accessibility options:</p>
+                    <ul>
+                        <li><strong>Lodging:</strong> Resort and several hotels have ADA-accessible rooms</li>
+                        <li><strong>Attractions:</strong> Yellow Leaf Bay beaches and History Museum accessible</li>
+                        <li><strong>Transport:</strong> Some buses accessible. Rental agencies can arrange vehicles.</li>
+                        <li><strong>Dining:</strong> Many restaurants are ground-level and accessible</li>
+                    </ul>
+                    <p>Use the ♿ ADA Accessible filter to find options.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                    <span><span class="faq-number">8</span>When is the best time to visit?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Taniti has tropical weather year-round:</p>
+                    <ul>
+                        <li><strong>Peak:</strong> December-April — dry season, best weather</li>
+                        <li><strong>Shoulder:</strong> May and November — fewer crowds</li>
+                        <li><strong>Off-Peak:</strong> June-October — occasional rain, best prices</li>
+                    </ul>
+                    <p><em>Check holiday calendar before booking!</em></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <a href="#things-to-do">Things To Do</a>
+                <a href="#lodging">Lodging</a>
+                <a href="#dining">Dining</a>
+                <a href="#getting-here">Getting Here</a>
+            </div>
+            <div class="footer-col">
+                <h3>Plan</h3>
+                <a href="#plan-your-trip">FAQ</a>
+                <a href="#">Travel Tips</a>
+                <a href="#">Holiday Calendar</a>
+                <a href="#">Maps</a>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Info</h3>
+                <p>Currency: USD</p>
+                <p>Power: 120V (US)</p>
+                <p>Language: English</p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <a href="#">info@visittaniti.com</a>
+                <a href="#">Tourism Office</a>
+                <a href="#">Accessibility Help</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>LOW-FIDELITY WIREFRAME — Taniti Tourism Website</p>
+        </div>
+    </footer>
+    
+    <script>
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
+        
+        function toggleFAQ(button) {
+            const faqItem = button.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+                item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+            });
+            
+            if (!isActive) {
+                faqItem.classList.add('active');
+                button.setAttribute('aria-expanded', 'true');
+            }
+        }
+        
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('nav-menu').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
