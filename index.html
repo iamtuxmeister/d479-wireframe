@@ -20,7 +20,6 @@
             line-height: 1.5;
         }
         
-        /* Skip to content for accessibility */
         .skip-link {
             position: absolute;
             top: -40px;
@@ -34,10 +33,12 @@
             top: 0;
         }
         
-        /* Header & Navigation */
         header {
             background: #e0e0e0;
             border-bottom: 2px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         .nav-container {
             max-width: 1000px;
@@ -87,7 +88,6 @@
             margin: 3px 0;
         }
         
-        /* Hero Section */
         .hero {
             background: #d0d0d0;
             border-bottom: 2px solid #333;
@@ -135,7 +135,6 @@
             font-family: 'Courier New', monospace;
         }
         
-        /* Destination Overview */
         .destination-overview {
             background: #f5f5f5;
             padding: 40px 20px;
@@ -191,7 +190,6 @@
             color: #666;
         }
         
-        /* Section Styling */
         .section {
             padding: 40px 20px;
             max-width: 1000px;
@@ -224,7 +222,6 @@
             font-size: 14px;
         }
         
-        /* Filter Bar */
         .filter-bar {
             background: #eee;
             padding: 15px;
@@ -245,6 +242,7 @@
             font-size: 12px;
             font-family: 'Courier New', monospace;
             background: white;
+            cursor: pointer;
         }
         .filter-checkbox {
             display: flex;
@@ -254,17 +252,23 @@
             background: #fff;
             border: 1px solid #666;
             font-size: 12px;
+            cursor: pointer;
         }
         .filter-checkbox input {
             width: 16px;
             height: 16px;
+            cursor: pointer;
         }
         .ada-filter {
             border: 2px solid #333;
             background: #e8e8e8;
         }
+        .filter-count {
+            font-size: 12px;
+            color: #666;
+            margin-left: auto;
+        }
         
-        /* Cards Grid */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -274,6 +278,10 @@
             background: white;
             border: 2px solid #333;
             overflow: hidden;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .card.hidden {
+            display: none;
         }
         .card-image {
             height: 120px;
@@ -330,7 +338,17 @@
             font-family: 'Courier New', monospace;
         }
         
-        /* Reviews Section */
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 14px;
+            display: none;
+        }
+        .no-results.visible {
+            display: block;
+        }
+        
         .reviews-section {
             background: #e0e0e0;
             padding: 40px 20px;
@@ -388,7 +406,6 @@
             color: #666;
         }
         
-        /* FAQ Section */
         .faq-section {
             background: #f5f5f5;
             padding: 40px 20px;
@@ -435,6 +452,7 @@
         .faq-icon {
             font-size: 20px;
             font-weight: bold;
+            transition: transform 0.3s;
         }
         .faq-item.active .faq-icon {
             transform: rotate(45deg);
@@ -463,7 +481,6 @@
             margin-bottom: 6px;
         }
         
-        /* Footer */
         footer {
             background: #333;
             color: white;
@@ -508,7 +525,6 @@
             font-size: 12px;
         }
         
-        /* Wireframe Label */
         .wireframe-label {
             background: #333;
             color: white;
@@ -519,7 +535,6 @@
             letter-spacing: 2px;
         }
         
-        /* Mobile Responsive */
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
@@ -555,6 +570,10 @@
                 flex-direction: column;
                 align-items: stretch;
             }
+            .filter-count {
+                margin-left: 0;
+                text-align: center;
+            }
             .cards-grid {
                 grid-template-columns: 1fr;
             }
@@ -566,7 +585,6 @@
     
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
-    <!-- Header -->
     <header>
         <div class="nav-container">
             <a href="#" class="logo">[TANITI LOGO]</a>
@@ -587,7 +605,6 @@
         </div>
     </header>
     
-    <!-- Hero Section -->
     <section class="hero" id="main-content">
         <div class="hero-image-placeholder">[HERO IMAGE - Beach/Island View]</div>
         <h1>Welcome to Taniti Island</h1>
@@ -595,7 +612,6 @@
         <a href="#things-to-do" class="cta-button">Start Exploring →</a>
     </section>
     
-    <!-- Destination Overview -->
     <section class="destination-overview">
         <div class="overview-container">
             <div class="overview-image">[ISLAND AERIAL VIEW IMAGE]</div>
@@ -621,7 +637,7 @@
         </div>
     </section>
     
-    <!-- Things To Do Section -->
+    <!-- THINGS TO DO -->
     <section class="section-alt" id="things-to-do">
         <div class="section-inner">
             <h2 class="section-title">Things To Do</h2>
@@ -629,23 +645,24 @@
             
             <div class="filter-bar">
                 <label>Filter:</label>
-                <select class="filter-select" aria-label="Filter by category">
-                    <option>All Categories</option>
-                    <option>Beaches & Water</option>
-                    <option>Nature & Adventure</option>
-                    <option>Entertainment</option>
-                    <option>Culture & History</option>
+                <select class="filter-select" id="activities-category" onchange="filterActivities()">
+                    <option value="all">All Categories</option>
+                    <option value="beach">Beaches & Water</option>
+                    <option value="nature">Nature & Adventure</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="culture">Culture & History</option>
                 </select>
                 <label class="filter-checkbox">
-                    <input type="checkbox"> Family Friendly
+                    <input type="checkbox" id="activities-family" onchange="filterActivities()"> Family Friendly
                 </label>
                 <label class="filter-checkbox ada-filter">
-                    <input type="checkbox"> ♿ ADA Accessible
+                    <input type="checkbox" id="activities-ada" onchange="filterActivities()"> ♿ ADA Accessible
                 </label>
+                <span class="filter-count" id="activities-count">Showing 6 of 6</span>
             </div>
             
-            <div class="cards-grid">
-                <article class="card">
+            <div class="cards-grid" id="activities-grid">
+                <article class="card" data-category="beach" data-family="true" data-ada="true">
                     <div class="card-image">[BEACH PHOTO]</div>
                     <div class="card-content">
                         <h3 class="card-title">Yellow Leaf Bay Beaches</h3>
@@ -658,7 +675,7 @@
                     </div>
                 </article>
                 
-                <article class="card">
+                <article class="card" data-category="nature" data-family="false" data-ada="false">
                     <div class="card-image">[RAINFOREST PHOTO]</div>
                     <div class="card-content">
                         <h3 class="card-title">Rainforest Adventures</h3>
@@ -671,7 +688,7 @@
                     </div>
                 </article>
                 
-                <article class="card">
+                <article class="card" data-category="nature" data-family="false" data-ada="false">
                     <div class="card-image">[VOLCANO PHOTO]</div>
                     <div class="card-content">
                         <h3 class="card-title">Volcano Expeditions</h3>
@@ -684,7 +701,7 @@
                     </div>
                 </article>
                 
-                <article class="card">
+                <article class="card" data-category="culture" data-family="true" data-ada="true">
                     <div class="card-image">[LANDMARK PHOTO]</div>
                     <div class="card-content">
                         <h3 class="card-title">Historic Landmarks</h3>
@@ -697,7 +714,7 @@
                     </div>
                 </article>
                 
-                <article class="card">
+                <article class="card" data-category="beach" data-family="true" data-ada="false">
                     <div class="card-image">[SNORKELING PHOTO]</div>
                     <div class="card-content">
                         <h3 class="card-title">Snorkeling & Diving</h3>
@@ -710,7 +727,7 @@
                     </div>
                 </article>
                 
-                <article class="card">
+                <article class="card" data-category="culture" data-family="true" data-ada="true">
                     <div class="card-image">[MUSEUM PHOTO]</div>
                     <div class="card-content">
                         <h3 class="card-title">History Museum</h3>
@@ -723,39 +740,42 @@
                     </div>
                 </article>
             </div>
+            <div class="no-results" id="activities-no-results">No activities match your filters. Try adjusting your selection.</div>
         </div>
     </section>
     
-    <!-- Lodging Section -->
+    <!-- LODGING -->
     <section class="section" id="lodging">
         <h2 class="section-title">Lodging</h2>
         <p class="section-subtitle">From budget hostels to four-star resorts</p>
         
         <div class="filter-bar">
             <label>Filter:</label>
-            <select class="filter-select" aria-label="Filter by type">
-                <option>All Types</option>
-                <option>Hotels & Resorts</option>
-                <option>Bed & Breakfasts</option>
-                <option>Vacation Rentals</option>
-                <option>Hostels</option>
+            <select class="filter-select" id="lodging-type" onchange="filterLodging()">
+                <option value="all">All Types</option>
+                <option value="resort">Hotels & Resorts</option>
+                <option value="bnb">Bed & Breakfasts</option>
+                <option value="rental">Vacation Rentals</option>
+                <option value="hostel">Hostels</option>
             </select>
-            <select class="filter-select" aria-label="Filter by price">
-                <option>Any Price</option>
-                <option>$ Budget</option>
-                <option>$$ Moderate</option>
-                <option>$$$ Upscale</option>
+            <select class="filter-select" id="lodging-price" onchange="filterLodging()">
+                <option value="all">Any Price</option>
+                <option value="1">$ Budget</option>
+                <option value="2">$$ Moderate</option>
+                <option value="3">$$$ Upscale</option>
+                <option value="4">$$$$ Luxury</option>
             </select>
             <label class="filter-checkbox">
-                <input type="checkbox"> Family Friendly
+                <input type="checkbox" id="lodging-family" onchange="filterLodging()"> Family Friendly
             </label>
             <label class="filter-checkbox ada-filter">
-                <input type="checkbox"> ♿ ADA Accessible
+                <input type="checkbox" id="lodging-ada" onchange="filterLodging()"> ♿ ADA Accessible
             </label>
+            <span class="filter-count" id="lodging-count">Showing 4 of 4</span>
         </div>
         
-        <div class="cards-grid">
-            <article class="card">
+        <div class="cards-grid" id="lodging-grid">
+            <article class="card" data-type="resort" data-price="4" data-family="true" data-ada="true">
                 <div class="card-image">[RESORT PHOTO]</div>
                 <div class="card-content">
                     <h3 class="card-title">Taniti Bay Resort ★★★★</h3>
@@ -769,7 +789,7 @@
                 </div>
             </article>
             
-            <article class="card">
+            <article class="card" data-type="resort" data-price="2" data-family="true" data-ada="true">
                 <div class="card-image">[HOTEL PHOTO]</div>
                 <div class="card-content">
                     <h3 class="card-title">Taniti City Hotel</h3>
@@ -783,7 +803,7 @@
                 </div>
             </article>
             
-            <article class="card">
+            <article class="card" data-type="bnb" data-price="2" data-family="false" data-ada="false">
                 <div class="card-image">[B&B PHOTO]</div>
                 <div class="card-content">
                     <h3 class="card-title">Sunrise Bed & Breakfast</h3>
@@ -796,7 +816,7 @@
                 </div>
             </article>
             
-            <article class="card">
+            <article class="card" data-type="hostel" data-price="1" data-family="false" data-ada="false">
                 <div class="card-image">[HOSTEL PHOTO]</div>
                 <div class="card-content">
                     <h3 class="card-title">Backpacker's Hostel</h3>
@@ -809,9 +829,10 @@
                 </div>
             </article>
         </div>
+        <div class="no-results" id="lodging-no-results">No lodging matches your filters. Try adjusting your selection.</div>
     </section>
     
-    <!-- Dining Section -->
+    <!-- DINING -->
     <section class="section-alt" id="dining">
         <div class="section-inner">
             <h2 class="section-title">Dining</h2>
@@ -819,19 +840,21 @@
             
             <div class="filter-bar">
                 <label>Filter:</label>
-                <select class="filter-select" aria-label="Filter by cuisine">
-                    <option>All Cuisines</option>
-                    <option>Local Tanitian</option>
-                    <option>American</option>
-                    <option>Pan-Asian</option>
+                <select class="filter-select" id="dining-cuisine" onchange="filterDining()">
+                    <option value="all">All Cuisines</option>
+                    <option value="local">Local Tanitian</option>
+                    <option value="american">American</option>
+                    <option value="asian">Pan-Asian</option>
+                    <option value="grocery">Grocery</option>
                 </select>
                 <label class="filter-checkbox ada-filter">
-                    <input type="checkbox"> ♿ ADA Accessible
+                    <input type="checkbox" id="dining-ada" onchange="filterDining()"> ♿ ADA Accessible
                 </label>
+                <span class="filter-count" id="dining-count">Showing 4 of 4</span>
             </div>
             
-            <div class="cards-grid">
-                <article class="card">
+            <div class="cards-grid" id="dining-grid">
+                <article class="card" data-cuisine="local" data-ada="true">
                     <div class="card-image">[RESTAURANT PHOTO]</div>
                     <div class="card-content">
                         <h3 class="card-title">Ocean's Catch</h3>
@@ -845,7 +868,7 @@
                     </div>
                 </article>
                 
-                <article class="card">
+                <article class="card" data-cuisine="american" data-ada="false">
                     <div class="card-image">[RESTAURANT PHOTO]</div>
                     <div class="card-content">
                         <h3 class="card-title">American Grill House</h3>
@@ -858,7 +881,7 @@
                     </div>
                 </article>
                 
-                <article class="card">
+                <article class="card" data-cuisine="asian" data-ada="false">
                     <div class="card-image">[RESTAURANT PHOTO]</div>
                     <div class="card-content">
                         <h3 class="card-title">Jade Garden</h3>
@@ -871,7 +894,7 @@
                     </div>
                 </article>
                 
-                <article class="card">
+                <article class="card" data-cuisine="grocery" data-ada="true">
                     <div class="card-image">[GROCERY PHOTO]</div>
                     <div class="card-content">
                         <h3 class="card-title">Grocery & Markets</h3>
@@ -884,10 +907,11 @@
                     </div>
                 </article>
             </div>
+            <div class="no-results" id="dining-no-results">No dining options match your filters. Try adjusting your selection.</div>
         </div>
     </section>
     
-    <!-- Getting Here Section -->
+    <!-- GETTING HERE -->
     <section class="section" id="getting-here">
         <h2 class="section-title">Getting Here</h2>
         <p class="section-subtitle">Multiple ways to reach our island</p>
@@ -931,7 +955,7 @@
         </div>
     </section>
     
-    <!-- Reviews Section -->
+    <!-- REVIEWS -->
     <section class="reviews-section">
         <div class="reviews-container">
             <h2 class="section-title">What Visitors Say</h2>
@@ -977,7 +1001,7 @@
         </div>
     </section>
     
-    <!-- Plan Your Trip / FAQ Section -->
+    <!-- PLAN YOUR TRIP / FAQ -->
     <section class="faq-section" id="plan-your-trip">
         <div class="faq-container">
             <h2 class="section-title">Plan Your Trip</h2>
@@ -1116,7 +1140,6 @@
         </div>
     </section>
     
-    <!-- Footer -->
     <footer>
         <div class="footer-container">
             <div class="footer-col">
@@ -1152,10 +1175,19 @@
     </footer>
     
     <script>
+        // Mobile menu toggle
         function toggleMenu() {
             document.getElementById('nav-menu').classList.toggle('active');
         }
         
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('nav-menu').classList.remove('active');
+            });
+        });
+        
+        // FAQ Accordion
         function toggleFAQ(button) {
             const faqItem = button.parentElement;
             const isActive = faqItem.classList.contains('active');
@@ -1171,11 +1203,122 @@
             }
         }
         
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('nav-menu').classList.remove('active');
+        // FILTER: Things To Do
+        function filterActivities() {
+            const category = document.getElementById('activities-category').value;
+            const familyOnly = document.getElementById('activities-family').checked;
+            const adaOnly = document.getElementById('activities-ada').checked;
+            
+            const cards = document.querySelectorAll('#activities-grid .card');
+            let visibleCount = 0;
+            const totalCount = cards.length;
+            
+            cards.forEach(card => {
+                const cardCategory = card.dataset.category;
+                const cardFamily = card.dataset.family === 'true';
+                const cardAda = card.dataset.ada === 'true';
+                
+                let show = true;
+                
+                if (category !== 'all' && cardCategory !== category) {
+                    show = false;
+                }
+                if (familyOnly && !cardFamily) {
+                    show = false;
+                }
+                if (adaOnly && !cardAda) {
+                    show = false;
+                }
+                
+                if (show) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
             });
-        });
+            
+            document.getElementById('activities-count').textContent = `Showing ${visibleCount} of ${totalCount}`;
+            document.getElementById('activities-no-results').classList.toggle('visible', visibleCount === 0);
+        }
+        
+        // FILTER: Lodging
+        function filterLodging() {
+            const type = document.getElementById('lodging-type').value;
+            const price = document.getElementById('lodging-price').value;
+            const familyOnly = document.getElementById('lodging-family').checked;
+            const adaOnly = document.getElementById('lodging-ada').checked;
+            
+            const cards = document.querySelectorAll('#lodging-grid .card');
+            let visibleCount = 0;
+            const totalCount = cards.length;
+            
+            cards.forEach(card => {
+                const cardType = card.dataset.type;
+                const cardPrice = card.dataset.price;
+                const cardFamily = card.dataset.family === 'true';
+                const cardAda = card.dataset.ada === 'true';
+                
+                let show = true;
+                
+                if (type !== 'all' && cardType !== type) {
+                    show = false;
+                }
+                if (price !== 'all' && cardPrice !== price) {
+                    show = false;
+                }
+                if (familyOnly && !cardFamily) {
+                    show = false;
+                }
+                if (adaOnly && !cardAda) {
+                    show = false;
+                }
+                
+                if (show) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            document.getElementById('lodging-count').textContent = `Showing ${visibleCount} of ${totalCount}`;
+            document.getElementById('lodging-no-results').classList.toggle('visible', visibleCount === 0);
+        }
+        
+        // FILTER: Dining
+        function filterDining() {
+            const cuisine = document.getElementById('dining-cuisine').value;
+            const adaOnly = document.getElementById('dining-ada').checked;
+            
+            const cards = document.querySelectorAll('#dining-grid .card');
+            let visibleCount = 0;
+            const totalCount = cards.length;
+            
+            cards.forEach(card => {
+                const cardCuisine = card.dataset.cuisine;
+                const cardAda = card.dataset.ada === 'true';
+                
+                let show = true;
+                
+                if (cuisine !== 'all' && cardCuisine !== cuisine) {
+                    show = false;
+                }
+                if (adaOnly && !cardAda) {
+                    show = false;
+                }
+                
+                if (show) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            document.getElementById('dining-count').textContent = `Showing ${visibleCount} of ${totalCount}`;
+            document.getElementById('dining-no-results').classList.toggle('visible', visibleCount === 0);
+        }
     </script>
 </body>
 </html>
